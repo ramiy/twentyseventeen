@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying posts
+ * Template part for displaying image posts
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -9,7 +9,6 @@
  * @since 1.0
  * @version 1.0
  */
-
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -42,7 +41,10 @@
 	<?php endif; ?>
 
 	<div class="entry-content">
-		<?php
+
+		<?php if ( is_single() || '' === get_the_post_thumbnail() ) :
+
+			// Only show content if is a single post, or if there's no featured image.
 			the_content( sprintf(
 				/* translators: %s: Name of current post. */
 				__( 'Continue reading %s', 'twentyseventeen' ),
@@ -55,13 +57,9 @@
 				'link_before' => '<span class="page-number">',
 				'link_after'  => '</span>',
 			) );
-		?>
-	</div><!-- .entry-content -->
 
-	<?php if ( is_single() ) : ?>
-		<footer class="entry-footer">
-			<?php twentyseventeen_entry_footer(); ?>
-		</footer><!-- .entry-footer -->
-	<?php endif; ?>
+		endif; ?>
+
+	</div><!-- .entry-content -->
 
 </article><!-- #post-## -->
